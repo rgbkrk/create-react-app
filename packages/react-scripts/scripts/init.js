@@ -103,6 +103,7 @@ module.exports = function(
     "react",
     "react-dom",
     "@nteract/presentational-components",
+    "styled-jsx",
     "rx-jupyter",
     "rx-binder"
   );
@@ -112,6 +113,9 @@ module.exports = function(
     appPath,
     ".template.dependencies.json"
   );
+
+  console.log("template dep path!!!!@!@!@!@!", templateDependenciesPath);
+
   if (fs.existsSync(templateDependenciesPath)) {
     const templateDependencies = require(templateDependenciesPath).dependencies;
     args = args.concat(
@@ -119,7 +123,11 @@ module.exports = function(
         return `${key}@${templateDependencies[key]}`;
       })
     );
+
+    console.log("hope I'm laying it down ", args);
     fs.unlinkSync(templateDependenciesPath);
+  } else {
+    console.log("NO BUENO!!?!?@!@");
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
